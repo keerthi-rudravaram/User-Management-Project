@@ -5,60 +5,43 @@
   min-height: 100vh;
   background: linear-gradient(180deg, #0d003b 0%, #21004d 70%, #65537d 95%);
   position: relative;
-  overflow: hidden;
-  /* padding-top: 220px;  */
-}
-
-
-.banner {
-  position: fixed; 
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 180px;
-  background: url('C:/Users/KR018400/OneDrive - Zelis Healthcare/Desktop/User-Task/user-project/src/zelis-banner.webp')
-    no-repeat center top/cover;
-  z-index: 1; 
-  background-position: -0.1cm top;
-  background-size: cover;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-top: 30px;
 }
 
 .flex {
   position: relative;
   z-index: 1;
-  opacity: 1;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 1rem;
-  box-sizing: border-box;
 }
 
+.w-full.max-w-md,
 .max-w-md {
   background: rgba(255, 255, 255, 0.95);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
   border-radius: 1rem;
-  padding: 2rem;
+  padding: 1.5rem; 
   width: 100%;
-  max-width: 400px;
+  max-width: 350px; 
   box-sizing: border-box;
-  margin-top: -100px;
+  margin-top: 20px;
+  transition: all 0.3s ease;
 }
 
-img {
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
-  max-width: 100%;
-  height: auto;
-}
-
-input {
+input,
+select {
   width: 100%;
   transition: all 0.25s ease;
   box-sizing: border-box;
 }
 
-input:focus {
+input:focus,
+select:focus {
   border-color: #2563eb;
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
 }
@@ -82,49 +65,62 @@ button[type='submit']:active {
   font-size: 0.8rem;
 }
 
+
+@media (min-width: 1201px) {
+  .max-w-md {
+    max-width: 350px;
+    padding: 1.75rem;
+    margin-top: 30px;
+  }
+}
+
+@media (max-width: 1200px) and (min-width: 1025px) {
+  .max-w-md {
+    max-width: 320px;
+    padding: 1.5rem;
+    margin-top: 25px;
+  }
+}
+
 @media (max-width: 1024px) {
   :host {
-    padding-top: 180px;
-  }
-
-  .banner {
-    height: 250px;
+    padding-top: 100px;
   }
 
   .max-w-md {
-    margin-top: -80px;
-    padding: 1.75rem;
+    max-width: 340px;
+    margin-top: 20px;
+    padding: 1.5rem;
   }
 }
 
 @media (max-width: 768px) {
   :host {
-    padding-top: 160px;
-  }
-
-  .banner {
-    height: 200px;
-    background-position: center top;
+    padding-top: 80px;
   }
 
   .max-w-md {
     max-width: 90%;
-    margin-top: -60px;
-    padding: 1.5rem;
+    margin-top: 10px;
+    padding: 1.25rem;
   }
 }
 
 @media (max-width: 480px) {
   :host {
-    padding-top: 120px;
-  }
-
-  .banner {
-    height: 150px;
+    padding-top: 60px;
   }
 
   .max-w-md {
-    margin-top: -50px;
-    padding: 1.25rem;
+    max-width: 95%;
+    padding: 1rem;
+    margin-top: 5px;
+  }
+
+  input,
+  button[type='submit'],
+  select {
+    font-size: 0.9rem;
+    padding: 0.75rem;
   }
 }
