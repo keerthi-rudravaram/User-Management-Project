@@ -1,17 +1,17 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
 import { Auth, User } from '../services/auth-service';
+import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-dashboard',
-  imports: [RouterModule, CommonModule, FormsModule],
-  templateUrl: './dashboard.html',
-  styleUrl: './dashboard.css',
+  selector: 'app-admin-dashboard',
+  imports: [FormsModule, RouterModule, CommonModule],
+  templateUrl: './admin-dashboard.html',
+  styleUrl: './admin-dashboard.css'
 })
-export class Dashboard {
-  loading = true;
+export class AdminDashboard {
+   loading = true;
   userEmail: string = '';
   userId: string = '';
   userRole: string = '';
@@ -62,13 +62,23 @@ export class Dashboard {
   }
 
   saveEdit(userId: string) {
-    if (!this.editUserData.name || !this.editUserData.email || !this.editUserData.role) return;
+    if (!this.editUserData.name || !this.editUserData.email || !this.editUserData.role) {
+      alert('All fields (Name, Email, Role) are required.');
+      return;
+    }
+
+    const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+    if (!emailPattern.test(this.editUserData.email)) {
+      alert('Invalid email format.');
+      return;
+    }
 
     this.authService.updateUser(userId, this.editUserData).subscribe({
       next: (updatedUser) => {
         const index = this.users.findIndex((u) => u.id === userId);
         if (index !== -1) this.users[index] = updatedUser;
         this.cancelEdit();
+        alert('User updated successfully!');
       },
       error: (err) => console.error('Error updating user', err),
     });
@@ -88,4 +98,5 @@ export class Dashboard {
   getCurrentUser() {
     return this.authService.getCurrentUser();
   }
+
 }

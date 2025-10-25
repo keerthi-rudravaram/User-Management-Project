@@ -1,0 +1,8 @@
+.gradient {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #0d003b 0%, #21004d 70%, #65537d 95%);
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+

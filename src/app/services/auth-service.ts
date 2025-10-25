@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 export interface User {
@@ -16,6 +16,10 @@ export interface User {
 })
 export class Auth {
   private apiURL = 'https://68edee12df2025af78019dcc.mockapi.io/app';
+
+  private loggedInSubject = new BehaviorSubject<boolean>(this.isLoggedIn());
+  loggedIn$ = this.loggedInSubject.asObservable();
+
 
   constructor(private http: HttpClient) {}
 
@@ -39,6 +43,7 @@ export class Auth {
           };
           const token = btoa(JSON.stringify(tokenPayload));
           localStorage.setItem('jwtToken', token);
+          this.loggedInSubject.next(true);
           console.log(token);
           return token;
         }
@@ -49,6 +54,7 @@ export class Auth {
 
   logout() {
     localStorage.removeItem('jwtToken');
+    this.loggedInSubject.next(false);
   }
 
   getToken(): string | null {

@@ -1,71 +1,55 @@
-<div class="flex flex-col justify-center items-center p-4">
-  <div
-    class="max-w-md w-full mx-auto border border-gray-300 rounded-2xl p-6 sm:p-8 shadow-lg bg-white bg-opacity-95 backdrop-blur-md relative z-10"
-  >
-    <div class="text-center mb-4">
-      <img
-        src="https://qtxasset.com/quartz/qcloud5/media/image/Zelis%20Primary%20Logo%20(Web)%20RGB-PNG%20Blue_0.png?VersionId=OCjgBdsWNwfUaFO.OzaFKxpcWF3L7Ay6"
-        alt="logo"
-        class="w-32 sm:w-36 inline-block"
-      />
-    </div>
+<div class="card bg-opacity-95">
+  <div class="imageContainer">
+    <img
+      src="https://qtxasset.com/quartz/qcloud5/media/image/Zelis%20Primary%20Logo%20(Web)%20RGB-PNG%20Blue_0.png?VersionId=OCjgBdsWNwfUaFO.OzaFKxpcWF3L7Ay6"
+      alt="logo"
+      class="image"
+    />
+  </div>
 
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <div class="space-y-4 sm:space-y-5">
-        <!-- Email -->
-        <div>
-          <label class="text-slate-900 text-sm font-medium mb-1 block">Email Id</label>
-          <input
-            type="text"
-            formControlName="email"
-            class="text-slate-900 bg-white border border-gray-300 w-full text-sm px-3 py-2 rounded-md outline-blue-500"
-            placeholder="Enter email"
-          />
-          @if (f['email'].touched && f['email'].invalid) {
-          <div class="text-red-500 text-xs mt-1">
-            @if (f['email'].errors?.['required']) { <span>Email is required.</span> } @if
-            (f['email'].errors?.['email']) { <span>Enter a valid email.</span> }
-          </div>
-          }
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="loginCard">
+      <!-- Email -->
+      <div>
+        <label class="label">Email Id</label>
+        <input type="text" formControlName="email" class="input-field" placeholder="Enter email" />
+        @if (f['email'].touched && f['email'].invalid) {
+        <div class="error-message">
+          @if (f['email'].errors?.['required']) { <span>Email is required.</span> } @if
+          (f['email'].errors?.['email']) { <span>Enter a valid email.</span> }
         </div>
-
-        <div>
-          <label class="text-slate-900 text-sm font-medium mb-1 block">Password</label>
-          <input
-            type="password"
-            formControlName="password"
-            class="text-slate-900 bg-white border border-gray-300 w-full text-sm px-3 py-2 rounded-md outline-blue-500"
-            placeholder="Enter password"
-          />
-          @if (f['password'].touched && f['password'].invalid) {
-          <div class="text-red-500 text-xs mt-1">
-            @if (f['password'].errors?.['required']) { <span>Password is required.</span> } @if
-            (f['password'].errors?.['minlength']) {
-            <span>Password must be at least 6 characters.</span> }
-          </div>
-          }
+        }
+      </div>
+      <!-- password -->
+      <div>
+        <label class="label">Password</label>
+        <input
+          type="password"
+          formControlName="password"
+          class="input-field"
+          placeholder="Enter password"
+        />
+        @if (f['password'].touched && f['password'].invalid) {
+        <div class="error-message">
+          @if (f['password'].errors?.['required']) { <span>Password is required.</span> } @if
+          (f['password'].errors?.['minlength']) {
+          <span>Password must be at least 6 characters.</span> }
         </div>
-
-        @if (loginError) {
-        <div class="text-red-500 text-xs mt-1">{{ loginError }}</div>
         }
       </div>
 
-      <div class="mt-6">
-        <button
-          type="submit"
-          class="w-full py-2 sm:py-3 text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-all duration-200"
-        >
-          Login
-        </button>
-      </div>
+      @if (loginError) {
+      <div class="error-message">{{ loginError }}</div>
+      }
+    </div>
 
-      <p class="text-slate-600 text-sm mt-4 text-center">
-        Don't have an account?
-        <a routerLink="/signup" class="text-blue-600 font-medium hover:underline ml-1"
-          >Register here</a
-        >
-      </p>
-    </form>
-  </div>
+    <div class="mt-6">
+      <button type="submit" class="btn">Login</button>
+    </div>
+
+    <p class="p">
+      Don't have an account?
+      <a routerLink="/signup" class="route-link">Register here</a>
+    </p>
+  </form>
 </div>

@@ -41,7 +41,7 @@ export class Login {
           if (!user) return;
 
           if (user.role === 'admin') {
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['/admin-dashboard']);
           } else {
             this.router.navigate(['/user-dashboard']);
           }

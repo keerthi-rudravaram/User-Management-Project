@@ -3,16 +3,11 @@
   style="background: linear-gradient(180deg, #0d003b 0%, #21004d 70%, #65537d 95%)"
 >
   <div class="max-w-6xl mx-auto p-4">
-    <div class="flex justify-between items-center mb-6 flex-wrap">
+    <div class="text-center mb-6">
       <h1 class="text-3xl font-bold text-slate-50">Dashboard</h1>
-      <button
-        (click)="logout()"
-        class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded font-medium"
-      >
-        Logout
-      </button>
     </div>
-    @if(loading){
+
+    @if (loading) {
     <div class="flex justify-center items-center h-64">
       <svg
         aria-hidden="true"
@@ -61,9 +56,14 @@
               <input
                 type="text"
                 [(ngModel)]="editUserData.name"
+                required
+                #nameInput="ngModel"
                 class="border px-2 py-1 rounded w-full"
+                placeholder="Enter name"
               />
-              } @else { {{ user.name }} }
+              @if (nameInput.invalid && nameInput.touched) {
+              <div class="text-red-500 text-xs mt-1">Name is required</div>
+              } } @else { {{ user.name }} }
             </td>
 
             <td class="px-4 py-3 text-left">
@@ -71,21 +71,35 @@
               <input
                 type="email"
                 [(ngModel)]="editUserData.email"
+                required
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                #emailInput="ngModel"
                 class="border px-2 py-1 rounded w-full"
+                placeholder="Enter valid email"
               />
-              } @else { {{ user.email }} }
+              @if (emailInput.invalid && emailInput.touched) {
+              <div class="text-red-500 text-xs mt-1">
+                @if (emailInput.errors?.['required']) { Email is required } @if
+                (emailInput.errors?.['pattern']) { Invalid email format }
+              </div>
+              } } @else { {{ user.email }} }
             </td>
 
             <td class="px-4 py-3 text-center">
               @if (editUserId === user.id && userRole === 'admin') {
               <select
                 [(ngModel)]="editUserData.role"
+                required
+                #roleInput="ngModel"
                 class="border px-2 py-1 rounded w-full text-center"
               >
+                <option value="">Select Role</option>
                 <option value="admin">Admin</option>
                 <option value="user">User</option>
               </select>
-              } @else { {{ user.role }} }
+              @if (roleInput.invalid && roleInput.touched) {
+              <div class="text-red-500 text-xs mt-1">Role is required</div>
+              } } @else { {{ user.role }} }
             </td>
 
             <td class="px-4 py-3 text-center">
@@ -94,14 +108,15 @@
                 <button
                   type="button"
                   (click)="saveEdit(user.id)"
-                  class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm py-2 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800 w-24"
+                  [disabled]="!editUserData.name || !editUserData.email || !editUserData.role"
+                  class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm py-2 text-center w-24 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Save
                 </button>
                 <button
                   type="button"
                   (click)="cancelEdit()"
-                  class="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm py-2 text-center dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800 w-24"
+                  class="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm py-2 text-center w-24"
                 >
                   Cancel
                 </button>
@@ -111,14 +126,14 @@
                 <button
                   type="button"
                   (click)="startEdit(user)"
-                  class="text-green-800 hover:text-white border border-green-800 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-800 font-medium rounded-lg text-sm py-2 text-center dark:border-green-800 dark:text-green-800 dark:hover:text-white dark:hover:bg-green-800 dark:focus:ring-green-800 w-24"
+                  class="text-green-800 hover:text-white border border-green-800 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-800 font-medium rounded-lg text-sm py-2 text-center w-24"
                 >
                   Edit
                 </button>
                 <button
                   type="button"
                   (click)="deleteUser(user.id)"
-                  class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm py-2 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900 w-24"
+                  class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm py-2 text-center w-24"
                 >
                   Delete
                 </button>

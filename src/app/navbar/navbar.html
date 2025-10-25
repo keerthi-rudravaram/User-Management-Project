@@ -1,0 +1,72 @@
+<div class="gradient">
+  @if(isLoggedIn) {
+  <nav class="bg-transparent px-6 py-4 flex justify-between items-center space-x-4">
+    <a routerLink="/" class=" text-white text-2xl font-bold">User Management App</a>
+    <div class="flex space-x-4">
+      <a
+        routerLink="/profile"
+        routerLinkActive="active"
+        class="inline-block px-4 py-2 border border-white text-white rounded-none active:opacity-50 hover:opacity-50 transition"
+      >
+        Home
+      </a>
+      @if(userRole === 'admin') {
+      <a
+        routerLink="/admin-dashboard"
+        routerLinkActive="active"
+        class="inline-block px-4 py-2 border border-white text-white rounded-none active:opacity-50 hover:opacity-50 transition"
+      >
+        Dashboard
+      </a>
+    }
+    @else {
+        <a
+        routerLink="/user-dashboard"
+        routerLinkActive="active"
+        class="inline-block px-4 py-2 border border-white text-white rounded-none active:opacity-50 hover:opacity-50 transition"
+      >
+        Dashboard
+      </a>
+
+    }
+      <a
+        (click)="logout()"
+        class="inline-block px-4 py-2 border border-white text-white rounded-none active:opacity-50 hover:opacity-50 transition cursor-pointer"
+      >
+        Logout
+      </a>
+    </div>
+  </nav>
+
+  
+  }@else{
+  <nav class="bg-transparent px-6 py-4 flex justify-between items-center space-x-4">
+    <a routerLink="/" class="italic text-white text-2xl font-bold">User Mangement App</a>
+    <div class="flex space-x-4">
+         <a
+        routerLink="/home"
+        routerLinkActive="active"
+        class="inline-block px-4 py-2 border border-white text-white rounded-none active:opacity-50 hover:opacity-50 transition"
+      >
+        Home
+      </a>
+      <a
+        routerLink="/login"
+        routerLinkActive="active"
+        class="inline-block px-4 py-2 border border-white text-white rounded-none active:opacity-50 hover:opacity-50 transition"
+      >
+        Login
+      </a>
+      <a
+        routerLink="/signup"
+        routerLinkActive="active"
+        class="inline-block px-4 py-2 border border-white text-white rounded-none active:opacity-50 hover:opacity-50 transition"
+      >
+        Sign Up
+      </a>
+    </div>
+  </nav>
+  }
+</div>
+
+
