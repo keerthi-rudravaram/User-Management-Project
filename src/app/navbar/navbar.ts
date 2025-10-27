@@ -18,9 +18,9 @@ export class Navbar {
 
   ngOnInit() {
     this.auth.loggedIn$.subscribe(() => {
-      this.updateAuthState();
+      this.updateAuthState(); //this is being called when login state changes
     });
-    this.updateAuthState();
+    this.updateAuthState(); //initial check on component load
   }
 
   updateAuthState() {

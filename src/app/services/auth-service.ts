@@ -100,6 +100,9 @@ export class Auth {
     const user = this.getCurrentUser();
     return user ? user.role : null;
   }
+  getUserById(userId: string): Observable<User> {
+    return this.http.get<User>(`${this.apiURL}/${userId}`);
+  }
 }
 
 //<User> is the response type

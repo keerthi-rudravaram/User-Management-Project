@@ -49,6 +49,7 @@
               'bg-zinc-400 dark:bg-zinc-400': getCurrentUser()?.id === user.id,
               'bg-white dark:bg-zinc-300': getCurrentUser()?.id !== user.id
             }"
+            (click)="goToDetails(user.id); $event.stopPropagation()"
             class="border-b border-gray-200 dark:border-gray-700 hover:bg-neutral-200 dark:hover:bg-neutral-200"
           >
             <td class="px-4 py-3 text-left">
@@ -107,7 +108,7 @@
               <div class="flex justify-center gap-2 flex-wrap">
                 <button
                   type="button"
-                  (click)="saveEdit(user.id)"
+                  (click)="saveEdit(user.id);  $event.stopPropagation()"
                   [disabled]="!editUserData.name || !editUserData.email || !editUserData.role"
                   class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm py-2 text-center w-24 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
@@ -115,7 +116,7 @@
                 </button>
                 <button
                   type="button"
-                  (click)="cancelEdit()"
+                  (click)="cancelEdit();  $event.stopPropagation()"
                   class="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm py-2 text-center w-24"
                 >
                   Cancel
@@ -125,14 +126,14 @@
               <div class="flex justify-center gap-2 flex-wrap">
                 <button
                   type="button"
-                  (click)="startEdit(user)"
+                  (click)="startEdit(user);  $event.stopPropagation()"
                   class="text-green-800 hover:text-white border border-green-800 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-800 font-medium rounded-lg text-sm py-2 text-center w-24"
                 >
                   Edit
                 </button>
                 <button
                   type="button"
-                  (click)="deleteUser(user.id)"
+                  (click)="deleteUser(user.id);  $event.stopPropagation()"
                   class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm py-2 text-center w-24"
                 >
                   Delete

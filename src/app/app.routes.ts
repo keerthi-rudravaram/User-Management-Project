@@ -6,8 +6,10 @@ import { RoleGuard } from './guard/role-guard';
 import { UserDashboard } from './user-dashboard/user-dashboard';
 import { Home } from './home/home';
 import { AdminDashboard } from './admin-dashboard/admin-dashboard';
+import { UserDetails } from './user-details/user-details';
 
 export const routes: Routes = [
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', component: Login },
   { path: 'signup', component: Signup },
   {
@@ -21,6 +23,7 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: 'home', component: Home },
+  { path: 'user-details/:id', component: UserDetails, canActivate: [AuthGuard] },
   { path: '**', redirectTo: 'home' },
 ];
 

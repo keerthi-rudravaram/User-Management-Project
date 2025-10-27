@@ -53,4 +53,8 @@ export class UserDashboard {
   {
     return this.authService.getCurrentUser();
   }
+
+  goToDetails(userId: string) {
+    this.router.navigate(['/user-details', userId]);
+  }
 }

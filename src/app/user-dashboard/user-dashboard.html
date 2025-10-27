@@ -49,6 +49,7 @@
               'bg-zinc-400 dark:bg-zinc-400': getCurrentUser()?.id === user.id,
               'bg-white dark:bg-zinc-300': getCurrentUser()?.id !== user.id
             }"
+            (click)="goToDetails(user.id)"
             class="border-b border-gray-200 dark:border-gray-700 hover:bg-neutral-200 dark:hover:bg-neutral-200"
           >
             <td class="px-4 py-3 text-left">
